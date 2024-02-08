@@ -1,0 +1,1 @@
+# baseQRScanner_
