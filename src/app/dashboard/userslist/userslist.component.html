@@ -1,0 +1,301 @@
+<div id="loading" style="display: none;"></div>
+<div>
+<div class="grid grid-cols-1" color="primary" class="page-header">
+
+  <h3>{{'User(s)' | translate}} </h3>
+</div>
+<div >
+ 
+
+  
+<div >
+    <div style="padding: 10px;" class="grid-cols-1">
+        <!-- table starts here -->
+
+           
+        <p-table   [resizableColumns]="true" dataKey="edasattestno"  [scrollable]="true"   selectionMode="multiple"
+        #tableref [rowHover]="true" [paginator]="true" currentPageReportTemplate="{{'Showing' | translate}} {first} {{'to' | translate}} {last} {{'of' | translate}} {totalRecords} {{'entries' | translate}}" [filterDelay]="0"
+        [totalRecords]="totalrecords"
+        [value]="list"
+        [rows]="5" [columns]="cols"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5, 10]"
+        [loading]="loading"
+        styleClass="p-datatable-customers p-datatable-gridlines"
+        currentPageReportTemplate="{{'Showing' | translate}} {first} {{'to' | translate}} {last} {{'of' | translate}} {totalRecords} {{'entries' | translate}}"
+        [globalFilterFields]="[
+         'eid','fullnameen','usertype','emailid', 'mobilenumber', 'enteredby', 'enteredon'
+        ]">
+      
+        <ng-template pTemplate="caption">
+
+          <p-toolbar  >
+            <ng-template pTemplate="left">
+              <div style="padding: 5px;" class="col-md-3 col-lg-3 col-sm-6">
+                      <mat-form-field class="searchboxinput" >
+                        <mat-label><mat-icon style="font-size:larger;">search</mat-icon> {{'SearchKeyword' | translate}}</mat-label>
+                        <input appTrimInput   matInput type="text" (input)="tableref.filterGlobal($any($event.target).value, 'contains')" placeholder="{{'SearchKeyword' | translate}}">
+                      </mat-form-field>
+              </div>
+           
+</ng-template>
+          <ng-template pTemplate="right">
+          
+            
+        
+       
+        
+        <button type="button" pButton  pRipple  icon="pi pi-file-excel"  (click)="exportExcel()"  class="mr-2 grid-header-right-icon"  pTooltip="{{'Excel' | translate}}"
+        tooltipPosition="bottom"
+      ></button>
+        
+
+          <button  type="button"
+          pButton  pRipple  icon="pi pi-filter"   (click)="clickChips()"  class="mr-2 grid-header-right-icon"
+          [ngClass]="{ clicked: enableFilters }"  [pTooltip]="'Filter' | translate"  tooltipPosition="bottom"
+        ></button>
+
+        <button  type="button"
+        pButton  pRipple  icon="pi pi-user-plus"   (click)="openDialog()"  class="mr-2 grid-header-right-icon"
+        [ngClass]="{ clicked: enableFilters }"  [pTooltip]="'Add User' | translate"  tooltipPosition="bottom"
+      ></button>
+      </ng-template>
+
+    
+         
+        </p-toolbar>
+        <!-- <tr>
+          <td colspan="12"> -->
+            <div style="padding-top: 10px;">
+
+            <div class="alert alert-success flex" role="alert">
+              <span
+                class="glyphicon glyphicon-exclamation-sign"
+                aria-hidden="true"
+              ></span>
+              <i class="fas fa-lightbulb light-bulb"></i>
+              <p>
+                Userlist Attestation Pending Request are shown in this list.
+                Userlist Attestation Pending Request are shown in this list.
+                Userlist Attestation Pending Request are shown in this list.
+                Userlist Attestation Pending Request are shown in this list.
+                Userlist Attestation Pending Request are shown in this list.
+
+              </p>
+            </div>
+            </div>
+          <!-- </td>
+        </tr> -->
+          
+          
+        </ng-template>
+        
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+              <!-- <th>
+              </th> -->
+              <th *ngFor="let col of columns" pResizableColumn [pSortableColumn]="col.field" >
+                  {{col.header | translate}} <p-sortIcon  [field]="col.field"  ></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  [field]="col.field"  *ngIf="enableFilters"
+                  display="menu"
+                ></p-columnFilter>
+              </th>
+              <th pFrozenColumn alignFrozen="right">{{'actions' | translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-list>
+          <tr>
+              <!-- <td>
+                  <p-tableCheckbox   [value]="list"></p-tableCheckbox>
+              </td> -->
+              <td>   
+                <!-- EmiratesID -->
+                <span >{{list.eid?.trim() | eidFormatter}} </span>
+                  
+              </td>
+              <td>
+                <!-- Name -->
+                  <span class="image-text">{{list.fullnameen}}</span>
+              </td>
+              <td>
+                <!-- Role -->
+                <span class="image-text">{{ list.usertype}}</span>
+            </td>
+            
+              <!-- <td>
+                  <span class="image-text">{{common.formatDateString(list.declarationdate)}}</span>  'usertype','emailid', 'mobilenumber', 'enteredby', 'enteredon'
+              </td> -->
+              <td>
+                <!-- Email ID -->
+                  <span class="image-text">{{list.emailid}}</span>
+              </td>
+              <td>
+                <!-- Mobile Number -->
+                  <span class="image-text">{{common.formatmobilenumber(list.mobilenumber)}}</span>
+              </td>
+              <td>
+                <!-- Entered by -->
+                  <span class="image-text">{{list.enteredby}}</span>
+              </td>
+              <td>
+                <!-- Entered on -->
+                  <span class="image-text">{{common.splitdatetime(list.enteredon)?.date}}</span>
+              </td>
+          
+            
+            <td pFrozenColumn alignFrozen="right">
+                <!-- Actions -->
+                <span class="image-text">
+                  <span (click)="deleteuserpopup(list)" ><mat-icon style="cursor: pointer;" pTooltip="{{'Delete' | translate}}"  class="icon_user">delete</mat-icon></span>
+
+                  <span (click)="editDialog(list)"><mat-icon style="cursor: pointer;" pTooltip="{{'Edit' | translate}}"  class="icon_user">edit</mat-icon></span> &nbsp; 
+                  
+
+                </span>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td style="text-align: center  !important;" colspan="9">{{'No data found.' | translate}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+        <!-- table ends here -->
+    </div>
+</div>
+</div>
+</div>
+
+<!-- modal starts here -->
+
+
+  <!-- modal details popup -->
+  <p-dialog [(visible)]="AddUserDialog" [draggable]="false" style="font-size: inherit;" [style]="{ width: '90%' }" header="User Details" [modal]="true" styleClass="p-fluid">
+    <!-- <h6>Please complete the following form section with accurate and up-to-date details.</h6> -->
+    <p-header>
+        <h2>{{ dialogTitle | translate }}</h2>
+      </p-header>
+      <p>{{'Please complete the following form section with accurate and up-to-date details.' | translate}}</p>
+<br>
+    <form [formGroup]="form">
+    
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'Company' | translate}}</mat-label>
+          <input appTrimInput  matInput formControlName="company" readonly [disabled]="true" name="company" placeholder="{{'Enter Company Name' | translate}}">
+        </mat-form-field>
+      </p>
+      <div style="display: flex; justify-content: space-between; ">
+        <div style="flex: 1; padding-right: 10px;">
+          <mat-form-field  appearance="outline">
+            <mat-label>{{'User Name' | translate}}</mat-label>
+          <mat-hint>{{'Enter your user name as on Emirates ID' | translate}}</mat-hint>
+            <input appTrimInput  matInput maxlength="200" placeholder="{{'Enter User Name' | translate}}"  formControlName="username" name="username">
+          <mat-error *ngIf="form.get('username')?.hasError('required')"> {{'User Name is required' | translate }} </mat-error>
+          <mat-error *ngIf="form.get('username')?.hasError('pattern')"> {{'User Name is required' | translate }} </mat-error>
+
+
+          </mat-form-field>
+        </div>
+      
+      </div>
+    <div style="display: flex;">
+      <div style="flex: 1; padding-right: 10px;">
+        <mat-form-field style="width: 100%;" class="example-full-width">
+          <mat-label>{{'Email ID' | translate}}</mat-label>
+          <input appTrimInput maxlength="100" matInput placeholder="{{'Enter Email ID' | translate}}" name="emailaddress" formControlName="emailaddress">
+          <mat-error *ngIf="form.get('emailaddress')?.hasError('required')"> {{'Email ID is required' | translate }} </mat-error>
+          <mat-error *ngIf="form.get('emailaddress')?.hasError('email')"> {{'Invalid Email ID' | translate }} </mat-error>
+
+
+          
+
+        </mat-form-field>
+      </div>
+      <div style="flex: 1;">
+        <mat-form-field style="width: 100%;" class="example-full-width">
+         
+          <mat-label>{{'mobilenumber' | translate }} </mat-label>
+          <input appTrimInput matInput   autocomplete="off" maxlength="9" formControlName="mobilenumber" name="mobilenumber" type="tel" placeholder="55 1234 567" (input)="onInput($event)">
+          <span matPrefix>+971&nbsp;</span>
+
+          <mat-error *ngIf="!(form.get('mobilenumber')?.hasError('minlength')|| form.get('mobilenumber')?.hasError('maxlength'))&&form.get('mobilenumber')?.hasError('pattern')"> {{'Invalid Mobile Number' | translate }} </mat-error>
+          <mat-error *ngIf="form.get('mobilenumber')?.hasError('minlength')|| form.get('mobilenumber')?.hasError('maxlength')">{{'Mobile Number must be 9 characters long' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('mobilenumber')?.hasError('required')"> {{'Mobile Number is required' | translate }} </mat-error>
+          
+
+          
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; ">
+      <div style="flex: 1; padding-right: 10px;">
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'Role' | translate}}</mat-label>
+          <mat-select name="role" placeholder="{{'Select Role' | translate}}" formControlName="role">
+            <mat-option value="ADMIN">{{'ADMIN' | translate}}</mat-option>
+            <mat-option value="USER">{{'USER' | translate}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('role')?.hasError('required')"> {{'Role is required' | translate }} </mat-error>
+
+        </mat-form-field>
+      </p>
+      </div>
+
+      
+        <div style="flex: 1;">
+      <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Access Profile</mat-label>
+        <mat-select formControlName="accessprofile" name="accessprofile" multiple>
+          <mat-option *ngFor="let accessprofile of accessprofileList" [value]="accessprofile">{{accessprofile}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('accessprofile')?.hasError('required')"> {{'Access profile is required' | translate }} </mat-error>
+      </mat-form-field>
+    </p>
+ 
+
+</div>
+    
+</div> 
+<div style="display: flex; justify-content: space-between; ">
+      <div style="flex: 1; ">
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'Emirates ID' | translate}}</mat-label>
+          <input matInput  placeholder="123-1234-1234567-1" appPhoneMask maxlength="18"  formControlName="emiratesID" name="emiratesID">
+        <mat-error *ngIf="form.get('emiratesID')?.hasError('required')"> {{'Emirates ID is required' | translate }} </mat-error>
+        <mat-error *ngIf="form.get('emiratesID')?.hasError('invalidEmiratesID')"> {{'Invalid Emirate ID' | translate }} </mat-error>
+        </mat-form-field>
+      </div>
+      <div style="flex: 1; "></div>
+</div>
+
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="{{'Cancel' | translate}}" icon="pi pi-times" class="p-confirm-dialog-reject" (click)="hideDialog()"></button>
+    <button style="color: white;" pButton pRipple label="{{ dialogActionButtonLabel | translate }}"  icon="pi pi-check" [disabled]="isButtonDisabled"  (click)="onSubmitDialogModal()"></button>
+<br>
+<br>
+    <div *ngIf="dialogTitle == 'Edit User'" class="grid grid-cols-1 edit_footer">
+      <div > <small>{{'Created on' | translate}} <strong>{{createdtime?.date}}</strong> {{'at' | translate}} <strong>{{createdtime?.time}} </strong> <span *ngIf="createdby">{{'by' | translate}} {{createdby}}</span>  </small>
+        <span  *ngIf="last_modifiedby!=''">
+<br>
+         <small>{{'Last Updated on' | translate}} <strong>{{last_modifiedtime?.date}}</strong> {{'at' | translate}} <strong>{{last_modifiedtime?.time}} </strong>  {{'by' | translate}} {{last_modifiedby}}</small><br> </span>
+       </div>
+    </div>
+  </ng-template>
+  </p-dialog>
+  
+
+  <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+
+<!-- modal ends here -->
+
+<div>
+  <app-pdf-export [pdfPayload]="pdfPayload"></app-pdf-export>
+</div>

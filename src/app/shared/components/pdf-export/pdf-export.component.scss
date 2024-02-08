@@ -1,0 +1,100 @@
+.moredetails-window {
+    min-height: calc(100vh - 150px);
+    min-width: 100%;
+    // padding: 0.4rem;
+  }
+  
+  .w-30 {
+    width: 30%;
+  }
+  
+  .more-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .more-body {
+    overflow-y: scroll;
+    // height: calc(100vh - 130px);
+    padding: 0 0 0.5rem 0.5rem;
+  }
+  
+  .viewmore {
+    .more-content {
+      padding: 0 0 0.5rem 0.5rem;
+      border: 0.1px solid lightgray;
+      // border-radius: 5px;
+      // margin: 0.25rem;
+      // font-family: serif;
+      // font-size: unset;
+      // color: black;
+      // height: 55px;
+      .title-label {
+        font-size: 0.8rem;
+        font-family: system-ui;
+        margin-bottom: 50px !important;
+      }
+      .more-content-body {
+        display: block;
+        flex: auto;
+        width: 100%;
+        .more-content-block {
+          font-weight: 600;
+          font-family: "robotobold";
+          color: black;
+        }
+        .downloadfile {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+  
+  .header1 {
+    display: flex;
+    justify-content: space-between;
+    .header1-right {
+      text-align: end;
+      font-family: "robotobold";
+    }
+  }
+  
+  .pdfContent {
+    padding: 0.5rem;
+    width: 40%;
+  }
+  
+  .body {
+    overflow-y: scroll;
+    height: calc(100vh - 130px);
+    padding: 0.1rem;
+  }
+  
+  .bold {
+    font-family: "robotobold";
+  }
+  
+  .footer-pdf {
+    text-align: center;
+    .footer-content {
+      color: lightgrey;
+    }
+  }
+  

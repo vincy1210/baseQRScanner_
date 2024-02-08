@@ -1,0 +1,327 @@
+<mat-divider></mat-divider>
+<div class="company-bg registration-page">
+  <div class="container mx-auto px-32 registration-window">
+    <!-- <div class="grid grid-cols-4 gap-6 px-5 py-3">
+    </div> -->
+    <div class="grid grid-cols-4 gap-6 px-5 py-3">
+      <div class="grid grid-cols-1 bg-yellow-db p-5">
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-home fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">{{ "Total Requests" | translate }}</p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofrequests }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 bg-yellow-db p-5"
+       
+      >
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-building fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">{{ "LCA Attestations" | translate }}</p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.nooflcarequestapproved }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 bg-yellow-db p-5">
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-check-circle fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">{{ "COO Attestations" | translate }}</p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofcoorequestapproved }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 bg-yellow-db p-5">
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-thumbs-up fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">
+                {{ "Physical Attestations" | translate }}
+              </p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofphysicalrequestapproved }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- pending tile dashboard  -->
+    <div class="grid grid-cols-4 gap-6 px-5 py-3">
+      <div class="grid grid-cols-1 bg-blue-db p-5">
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-home fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">
+                {{ "Total Pending Attestations" | translate }}
+              </p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofpendings }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 bg-blue-db p-5 cursror"
+        [routerLink]="'/lca/attestation'"
+      >
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-building fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">
+                {{ "Pending LCA Attestations" | translate }}
+              </p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.nooflcapendings }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 bg-blue-db p-5 cursror"
+        [routerLink]="'/coo/cooattestation'"
+      >
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-check-circle fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">
+                {{ "Pending COO Attestations" | translate }}
+              </p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofcoopendings }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 bg-blue-db p-5 cursror"
+        [routerLink]="'/physical/physicalattestation'"
+      >
+        <div class="grid grid-cols-3">
+          <div>
+            <i class="fa fa-thumbs-up fa-3x text-white"></i>
+          </div>
+          <div class="col-span-2">
+            <div class="text-right">
+              <p class="text-white">
+                {{ "Pending Physical Attestations" | translate }}
+              </p>
+              <h1 class="font-bold dashboard-scores text-white">
+                {{ totalTile.noofphysicalpendings }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- chart starts -->
+    <!-- attestation request -->
+    <div class="grid grid-cols-1 px-5 py-3">
+      <div class="grid grid-cols-1 bg-white-r p-5">
+        <div class="grid grid-cols-3">
+          <div class="labelandddl">
+            <h1 class="font-bold float-left mr-3">
+              {{ "LCA Attestation Requests" | translate }}
+            </h1>
+            <div style="width: 100px; padding-right: 10px" class="float-left">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ "Select" | translate }}</mat-label>
+                <mat-select
+                  (selectionChange)="onClickFilterOption('lca', $event.value)"
+                  value="01"
+                >
+                  <mat-option value="01">{{ "Day" | translate }}</mat-option>
+                  <mat-option value="02">{{ "Week" | translate }}</mat-option>
+                  <mat-option value="03">{{ "Month" | translate }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+         
+        </div>
+
+        <div class="grid grid-cols-1 border-top">
+          <div class="ps-01">
+            <div class="col-span-2">
+              <div class="flex justify-end">
+                <mat-list role="list" class="kd-guage-legends rkpi-guage-legends">
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-brown"
+                      >circle</mat-icon
+                    >{{ "Pending" | translate }}
+                  </mat-list-item>
+                 
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-black"
+                      >circle</mat-icon
+                    >{{ "Completed" | translate }}
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+            <div
+              echarts
+              [loading]="isLoading"
+              [options]="lcaChartOptionattestation"
+              class="demo-chart pb-3"
+              style="height: 300px; width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 px-5 py-3">
+      <div class="grid grid-cols-1 bg-white-r p-5">
+        <div class="grid grid-cols-3">
+          <div class="labelandddl">
+            <h1 class="font-bold float-left mr-3">
+              {{ "COO Attestation Requests" | translate }}
+            </h1>
+            <div style="width: 100px; padding-right: 10px" class="float-left">
+              <mat-form-field appearance="outline">
+                <mat-label>Select</mat-label>
+                <mat-select
+                  (selectionChange)="onClickFilterOption('coo', $event.value)"
+                  value="01">
+                  <mat-option value="01">{{ "Day" | translate }}</mat-option>
+                  <mat-option value="02">{{ "Week" | translate }}</mat-option>
+                  <mat-option value="03">{{ "Month" | translate }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+         
+        </div>
+        <div class="grid grid-cols-1 border-top">
+          <div class="ps-01">
+
+            <div class="col-span-2 ">
+              <div class="flex justify-end">
+                <mat-list role="list" class="kd-guage-legends rkpi-guage-legends">
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-brown"
+                      >circle</mat-icon
+                    >{{ "Pending" | translate }}
+                  </mat-list-item>
+                
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-black"
+                      >circle</mat-icon
+                    >{{ "Completed" | translate }}
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+
+            <div
+              [loading]="isLoading"
+              echarts
+              [options]="cooChartOptionattestation"
+              class="demo-chart pb-3"
+              style="height: 300px; width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 px-5 py-3">
+      <div class="grid grid-cols-1 bg-white-r p-5">
+        <div class="grid grid-cols-3">
+          <div class="labelandddl">
+            <h1 class="font-bold float-left mr-3">
+              {{ "Physical Attestation Requests" | translate }}
+            </h1>
+            <div style="width: 100px; padding-right: 10px" class="float-left">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ "Select" | translate }}</mat-label>
+                <mat-select
+                  (selectionChange)="
+                    onClickFilterOption('physical', $event.value)
+                  "
+                  value="01"
+                >
+                  <mat-option value="01">{{ "Day" | translate }}</mat-option>
+                  <mat-option value="02">{{ "Week" | translate }}</mat-option>
+                  <mat-option value="03">{{ "Month" | translate }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          
+        </div>
+        <div class="grid grid-cols-1 border-top">
+          <div class="ps-01">
+            <div class="col-span-2">
+              <div class="flex justify-end">
+                <mat-list role="list" class="kd-guage-legends rkpi-guage-legends dboardv">
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-brown"
+                      >circle</mat-icon
+                    >{{ "Pending" | translate }}
+                  </mat-list-item>
+                  <mat-list-item role="listitem">
+                    <mat-icon class="mr-1 kd-dot kdl-chart-color-black"
+                      >circle</mat-icon
+                    >{{ "Completed" | translate }}
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+            <div
+              echarts
+              [loading]="isLoading"
+              [options]="physicalChartOptionattestation"
+              class="demo-chart pb-3"
+              style="height: 300px; width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Status chart---- to avoid dup -->
+  <!-- main-template.component.html -->
+
+  </div>
+</div>

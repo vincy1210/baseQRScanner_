@@ -1,0 +1,74 @@
+<div #pdfContent id="pdfContent" class="pdfContent" *ngIf="IsPdfContent">
+    <div class="header1">
+      <div class="header1-left">
+        <img
+          src="./assets/img/logo/mofo-logo-merged.png"
+          alt="header-logo"
+          class="header-main-logo cursor-pointer"
+        />
+      </div>
+      <div class="header1-right">
+        <span>{{ pdfPayload?.header1Data?.header }}</span
+        ><br />
+        <span>{{ pdfPayload?.header1Data?.content }}</span>
+      </div>
+    </div>
+    <div class="header2">
+      <div class="more-body">
+        <div class="viewmore">
+          <div class="more-content-section">
+            <div class="grid grid-cols-2">
+              <ng-container
+                *ngFor="let data of pdfPayload?.header2Data; let ind = index"
+              >
+                <div class="more-content">
+                  <mat-label class="title-label">{{
+                    data.label | translate
+                  }}</mat-label>
+                  <div class="more-content-body">
+                    <mat-label class="more-content-block">{{
+                      data.value
+                    }}</mat-label>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="body">
+      <div>
+        <b>{{ pdfPayload?.bodyHeaderData }}</b>
+      </div>
+      <br />
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of pdfPayload?.bodyDataHeader">
+              {{ column }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of pdfPayload?.bodyData">
+            <td *ngFor="let column of pdfPayload?.bodyDataHeader">
+              {{ row[column] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer-pdf">
+      <div class="bold">THIS INVOICE IS AUTO GENERATED</div>
+      <br />
+      <span class="footer-content"
+        >For any inquiries or further assistance regrading this attestation
+        invoice, please contact our agenct's dedicated support team at
+        attestation@exampleagency.gov or 800 6698. Thank you for utilizing our
+        attestation services.</span
+      ><br />
+      <span class="bold"> End of Invoices </span>
+    </div>
+  </div>
+  

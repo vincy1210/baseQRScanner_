@@ -1,0 +1,26 @@
+
+.pay-btn {
+    width: 70%;
+}
+
+.payment-header-label {
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+}
+
+.payment-total-amount {
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    .payment-total-amount1 {
+        font-size: 13px;
+    }
+    .payment-total-amount2 {
+        font-size: 20px;
+    }
+    .payment-total-amount3 {
+        font-size: 10px;
+    }
+}

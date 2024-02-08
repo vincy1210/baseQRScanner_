@@ -1,0 +1,497 @@
+<!-- <app-loader></app-loader> -->
+<div id="loading" style="display: none"></div>
+<div
+  class="app-container"
+  [ngClass]="'currentTheme' | translate"
+  [dir]="currentLanguageDirection"
+>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-toolbar
+      class="main-header"
+      style="position: sticky; top: 0; left: 0; right: 0"
+    >
+      <a
+        *ngIf="bigScreen && false"
+        (click)="drawer.toggle()"
+        class="mr-2 cursor-pointer"
+      >
+        <mat-icon color="primary">menu</mat-icon>
+      </a>
+      <img
+        src="./assets/img/logo/mofo-logo-merged.png"
+        alt="header-logo"
+        class="header-main-logo cursor-pointer"
+      />
+
+      <span class="example-spacer"></span>
+      <div *ngIf="bigScreen">
+        <span>
+          <button
+            mat-icon-button
+            pTooltip="Change Font Size"
+            tooltipPosition="bottom"
+            class="white-icon-button"
+            color="primary"
+            [matMenuTriggerFor]="fontsizemenu"
+            *ngIf="false"
+          >
+            <!-- <i class="fa fa-palette" color="primary"></i> -->
+            <mat-icon svgIcon="text-size-icon" style="padding: 5px"></mat-icon>
+          </button>
+
+          <mat-menu
+            #fontsizemenu="matMenu"
+            yPosition="below"
+            class="mt-2 main-mat-menu font-size-mat-menu"
+          >
+            <button mat-menu-item (click)="toggle('sm')">
+              <mat-icon
+                svgIcon="text-size-icon"
+                style="padding: 5px"
+              ></mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="toggle('md')">
+              <mat-icon
+                svgIcon="text-size-icon"
+                style="padding: 2px"
+              ></mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="toggle('lg')">
+              <mat-icon svgIcon="text-size-icon" style="padding: 0"></mat-icon>
+            </button>
+          </mat-menu>
+
+          <button
+            mat-icon-button
+            pTooltip="Change Palette"
+            tooltipPosition="bottom"
+            class="white-icon-button"
+            color="primary"
+            [matMenuTriggerFor]="palettemenu"
+            *ngIf="false"
+          >
+            <i class="fa fa-palette" color="primary"></i>
+          </button>
+          <mat-menu
+            #palettemenu="matMenu"
+            yPosition="below"
+            class="mt-2 main-mat-menu font-size-mat-menu"
+          >
+            <button
+              mat-menu-item
+              (click)="usePalette('theme-default')"
+              class="palette-brown"
+            >
+              <mat-icon class="menudd-default">lens</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+              mat-menu-item
+              (click)="usePalette('theme-red')"
+              class="palette-red"
+            >
+              <mat-icon class="menudd-red">lens</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+              mat-menu-item
+              (click)="usePalette('theme-green')"
+              class="palette-green"
+            >
+              <mat-icon class="menudd-green">lens</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+              mat-menu-item
+              (click)="usePalette('theme-grey')"
+              class="palette-grey"
+            >
+              <mat-icon class="menudd-grey">lens</mat-icon>
+            </button>
+          </mat-menu>
+
+          <button
+            mat-icon-button
+            class="white-icon-button"
+            pTooltip="Change theme"
+            tooltipPosition="bottom"
+            color="primary"
+            [matMenuTriggerFor]="contrastmenu"
+            *ngIf="false"
+          >
+            <i class="fa fa-adjust"></i>
+          </button>
+
+          <mat-menu
+            #contrastmenu="matMenu"
+            yPosition="below"
+            class="mt-2 main-mat-menu font-size-mat-menu"
+          >
+            <button
+              mat-menu-item
+              (click)="classRoot = 'theme-default'"
+              class="access-black-white"
+            >
+              <i class="fa fa-adjust"></i>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+              mat-menu-item
+              (click)="classRoot = 'theme-yellowblue'"
+              class="access-blue-yellow"
+            >
+              <i class="fa fa-adjust"></i>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+              mat-menu-item
+              (click)="classRoot = 'theme-limeblack'"
+              class="access-black-lime"
+            >
+              <i class="fa fa-adjust"></i>
+            </button>
+          </mat-menu>
+
+          <button
+            mat-icon-button
+            class="white-icon-button"
+            color="primary"
+            [matMenuTriggerFor]="languagemenu"
+            pTooltip="Change Language"
+            tooltipPosition="bottom"
+          >
+            <i class="fa fa-globe"></i>
+          </button>
+        </span>
+        <!-- end -->
+        <mat-menu
+          #languagemenu="matMenu"
+          yPosition="below"
+          class="mt-2 main-mat-menu font-size-mat-menu"
+        >
+          <button mat-menu-item (click)="useLanguage('ar')">AR</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="useLanguage('en')">EN</button>
+        </mat-menu>
+
+        <button
+          mat-icon-button
+          class="white-icon-button"
+          pTooltip="Home"
+          tooltipPosition="bottom"
+          color="primary"
+          (click)="goToHome()"
+        >
+          <i class="fa fa-home"></i>
+        </button>
+        <!-- <mat-toolbar color="primary"> -->
+        <!-- Your existing header content here -->
+      </div>
+
+      <!--Menu Only Shown on Mobile starts-->
+      <div class="b-navbar" *ngIf="!bigScreen" class="top-toggle-icon">
+        <div class="b-navbar__toggle" *ngIf="!bigScreen">
+          <button
+            (click)="onToggle()"
+            class="b-navbar__button humberger-menu"
+            mat-button
+            [matMenuTriggerFor]="aboveMenu"
+          >
+            <mat-icon color="primary">menu</mat-icon>
+          </button>
+          <mat-menu #aboveMenu="matMenu">
+            <button
+              mat-menu-item
+              [matMenuTriggerFor]="fontsizemenu"
+              *ngIf="false"
+            >
+              <mat-icon
+                svgIcon="text-size-icon"
+                style="padding: 2px"
+              ></mat-icon>
+            </button>
+            <mat-menu
+              #fontsizemenu="matMenu"
+              yPosition="below"
+              class="mt-2 main-mat-menu font-size-mat-menu"
+            >
+              <button mat-menu-item (click)="toggle('sm')">
+                <mat-icon
+                  svgIcon="text-size-icon"
+                  style="padding: 5px"
+                ></mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="toggle('md')">
+                <mat-icon
+                  svgIcon="text-size-icon"
+                  style="padding: 2px"
+                ></mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="toggle('lg')">
+                <mat-icon
+                  svgIcon="text-size-icon"
+                  style="padding: 0"
+                ></mat-icon>
+              </button>
+            </mat-menu>
+
+            <button
+              mat-menu-item
+              class="white-icon-button"
+              color="primary"
+              [matMenuTriggerFor]="palettemenu"
+              *ngIf="false"
+            >
+              <i class="fa fa-palette" color="primary"></i>
+            </button>
+            <mat-menu
+              #palettemenu="matMenu"
+              yPosition="below"
+              class="mt-2 main-mat-menu font-size-mat-menu"
+            >
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-default'"
+                class="palette-brown"
+              >
+                <mat-icon class="menudd-default">lens</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-red'"
+                class="palette-red"
+              >
+                <mat-icon class="menudd-red">lens</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-green'"
+                class="palette-green"
+              >
+                <mat-icon class="menudd-green">lens</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-grey'"
+                class="palette-grey"
+              >
+                <mat-icon class="menudd-grey">lens</mat-icon>
+              </button>
+            </mat-menu>
+
+            <button
+              mat-menu-item
+              class="white-icon-button"
+              color="primary"
+              [matMenuTriggerFor]="contrastmenu"
+              *ngIf="false"
+            >
+              <i class="fa fa-adjust"></i>
+            </button>
+
+            <mat-menu
+              #contrastmenu="matMenu"
+              yPosition="below"
+              class="mt-2 main-mat-menu font-size-mat-menu"
+            >
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-default'"
+                class="access-black-white"
+              >
+                <i class="fa fa-adjust"></i>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-yellowblue'"
+                class="access-blue-yellow"
+              >
+                <i class="fa fa-adjust"></i>
+              </button>
+              <mat-divider></mat-divider>
+              <button
+                mat-menu-item
+                (click)="classRoot = 'theme-limeblack'"
+                class="access-black-lime"
+              >
+                <i class="fa fa-adjust"></i>
+              </button>
+            </mat-menu>
+
+            <!-- <button  mat-menu-item class="white-icon-button" color="primary">
+          <i class="fa fa-volume-up"></i>
+        </button> -->
+            <button
+              mat-menu-item
+              class="white-icon-button"
+              color="primary"
+              [matMenuTriggerFor]="languagemenu"
+            >
+              <i class="fa fa-globe"></i>
+            </button>
+            <mat-menu
+              #languagemenu="matMenu"
+              yPosition="below"
+              class="mt-2 main-mat-menu font-size-mat-menu"
+            >
+              <button mat-menu-item (click)="useLanguage('ar')">AR</button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="useLanguage('en')">EN</button>
+            </mat-menu>
+            <!-- <button  mat-menu-item class="white-icon-button" color="primary">
+          <i class="fa fa-search"></i>
+        </button> -->
+            <button
+              mat-menu-item
+              class="white-icon-button"
+              color="primary"
+              (click)="goToHome()"
+            >
+              <i class="fa fa-home"></i>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <!--Menu Only Shown on Mobile ends-->
+    </mat-toolbar>
+    <mat-drawer
+      #drawer
+      class="example-sidenav app-sidenav"
+      mode="over"
+      *ngIf="false"
+    >
+      <app-left-menu-drawer
+        (submenuClicked)="closeDrawer(drawer)"
+      ></app-left-menu-drawer>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <div id="font-id" [ngClass]="fontSize">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-container>
+  <div class="grid grid-cols-2 gap-4 footer-top-section">
+    <div class="copyrights">
+      <p>
+        {{ "© Copyright" | translate }} {{ common.getMyCopyrightYear() }}
+        {{ "Ministry of Foreign Affairs" | translate }},
+        {{ "Version" | translate }} {{ version }}
+      </p>
+    </div>
+    <!-- <div></div> -->
+    <div style="text-align: end">
+      <p>
+        {{ "For Inquiries around the clock (24/7)" | translate }} +97180044444
+      </p>
+    </div>
+  </div>
+  <!-- <mat-toolbar class="grid grid-cols-3 gap-4 footer-top-section">
+    <div>
+      <p>© Copyright 2023 Ministry of Foreign Affairs</p>
+
+    </div>
+    <div>
+      <p></p> 
+
+    </div>
+    <div>
+      <p>For Inquiries around the clock (24/7)  +97180044444</p> 
+
+    </div>
+  </mat-toolbar> -->
+</div>
+
+<p-dialog
+  [(visible)]="userwasIdle"
+  [draggable]="false"
+  style="top: 20%"
+  [style]="{ width: '750px' }"
+  [modal]="true"
+  styleClass="p-fluid"
+  *ngIf="false"
+>
+  <div class="viewmore">
+    <div class="more-content-section">
+      <mat-divider></mat-divider>
+      <div
+        style="
+          background: rgba(238, 242, 245, 0.2);
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          backdrop-filter: blur(2px);
+        "
+      ></div>
+      <div class="lock-screen">
+        <div class="lock-section">
+          <div class="body-bg w-100 login-page">
+            <div
+              class="container login-window alreadyregisteredapproved-section"
+            >
+              <div class="w-50 m-auto">
+                <mat-card>
+                  <div class="p-4 text-center">
+                    <h1 class="mt-0 mb-0 page-title-01">
+                      {{
+                        "Session locked due to inactivity. Please unlock to continue"
+                          | translate
+                      }}
+                    </h1>
+
+                    <div class="mt-3 grid grid-cols-1 rtl-form">
+                      <div class="grid grid-cols-1 mb-3">
+                        <div class="grid grid-cols-1">
+                          <div class="border-2 bg-white rounded-xl p-5">
+                            <div class="grid grid-cols-1 text-center mb-3">
+                              <i
+                                class="fa fa-question-circle fa-3x text-uaemofa"
+                              ></i>
+                            </div>
+                            <h2 class="text-lg">
+                              <strong
+                                >{{
+                                  "Would you like to continue? press the button below"
+                                    | translate
+                                }}
+                              </strong>
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="grid grid-cols-1"></div>
+
+                      <div class="text-right">
+                        <button
+                          mat-flat-button
+                          color="primary"
+                          (click)="resetfromhtml()"
+                        >
+                          {{ "Resume" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ng-template pTemplate="footer">
+    <p-button icon="pi pi-times" (click)="userwasIdle = false" label="{{'Cancel' | translate}}" styleClass="p-confirm-dialog-reject"></p-button>
+</ng-template> -->
+</p-dialog>

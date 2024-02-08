@@ -1,0 +1,389 @@
+<div class="body-bg verify-page">
+  <div class="container1" [ngClass]="{ 'verify-window': !showLockScreen }">
+    <div class="w-50 m-auto">
+      <mat-card class="mat-content">
+        <!-- Header with Stepper -->
+        <div class="stepheader">
+          <h1 class="mt-0 mb-0 page-title-01">
+            {{ "AttestationVerification" | translate }}
+          </h1>
+          <div class="mt-3 grid grid-cols-1">
+            <p-steps
+              [model]="items"
+              [(activeIndex)]="activeIndex"
+              (activeIndexChange)="indexchange($event)"
+            ></p-steps>
+          </div>
+        </div>
+
+        <!-- Body with Dynamic Messages -->
+        <div class="stepbody" #stepbody>
+          <div *ngIf="activeIndex === 0">
+            <br />
+            <div>
+              <p style="font-size: 15px; font-weight: 600">
+                {{ "welcome" | translate }}
+              </p>
+              <br />
+              <p>{{ "AttestationVerification" | translate }}</p>
+
+              <br />
+              <p>
+                {{ "kindlyuseService" | translate }}
+              </p>
+
+              <br />
+
+              <p>{{ "ClickNext" | translate }}</p>
+            </div>
+            <br />
+          </div>
+          <div *ngIf="activeIndex === 1" class="relative">
+            <br />
+            <div>
+              <p>
+                {{ "spotqrcode" | translate }}
+              </p>
+            </div>
+            <!-- ngx scanner starts -->
+            <div class="video-control" #videocontrol>
+              <!-- <div class="bg-gray-100 p-8 rounded shadow-lg"> -->
+              <zxing-scanner
+                class="myscanner"
+                [formats]="allowedFormats"
+                [enable]="scannerEnabled"
+                [(device)]="desiredDevice"
+                [torch]="torch"
+                (scanSuccess)="scanSuccessHandler($event)"
+                (scanError)="scanErrorHandler($event)"
+                (scanFailure)="scanFailureHandler($event)"
+                (scanComplete)="scanCompleteHandler($event)"
+                (camerasFound)="onCamerasFound($event)"
+                (permissionResponse)="onPermissionResponse($event)"
+                (error)="handleError($event)"
+              ></zxing-scanner>
+              <div
+                id="alert-2"
+                class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 alert alert-video absolute w-100"
+                role="alert"
+                *ngIf="isScanned && !isSearchResult"
+              >
+                <svg
+                  class="flex-shrink-0 w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+                  />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div class="ms-3 text-sm font-medium">
+                  {{ "InvalidQR" | translate }}
+                </div>
+              </div>
+              <div
+                id="alert-3"
+                class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 alert-video absolute w-100"
+                role="alert"
+                *ngIf="isScanned && isSearchResult"
+              >
+                <svg
+                  class="flex-shrink-0 w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+                  />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div class="ms-3 text-sm font-medium">
+                  <b>{{ edasreqno }}</b>
+                </div>
+              </div>
+              <!-- </div> -->
+            </div>
+            <br />
+            <!-- AA: {{ isScanned }} | BB: {{ isSearchResult }} -->
+          </div>
+          <div *ngIf="activeIndex === 2">
+            <!-- Step 3 -->
+            <div>
+              <b>{{ "Attestations" | translate }}</b>
+            </div>
+            <!-- Search result -->
+            <div
+              class="container mx-auto mt-1 mb-1 product-card"
+              *ngIf="isSearchResult"
+            >
+              <div class="grid grid-cols-1 p-2 gap-4">
+                <div
+                  *ngFor="let product of searchResults"
+                  class="bg-white p-2 rounded-lg shadow-md"
+                >
+                  <div class="more-body">
+                    <div class="viewmore">
+                      <div class="more-content-section">
+                        <ng-container
+                          *ngFor="
+                            let data of product?.viewmoredatas;
+                            let ind = index
+                          "
+                        >
+                          <div class="more-content">
+                            <mat-label class="title-label">{{
+                              data.label | translate
+                            }}</mat-label>
+                            <div class="more-content-body">
+                              <mat-label
+                                class="more-content-block"
+                                *ngIf="data.label !== 'Status'"
+                                >{{ data.value }}</mat-label
+                              >
+                              <mat-label
+                                class="more-content-block"
+                                *ngIf="data.label === 'Status'"
+                                [ngClass]="{
+                                  'status-color-green': data.value === 'Valid',
+                                  'status-color-red': data.value !== 'Valid'
+                                }"
+                                >{{ data.value }}</mat-label
+                              >
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div
+              class="container mx-auto mt-8 mb-5 product-card"
+              *ngIf="isSearchResult"
+            >
+              <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                  <thead>
+                    <tr>
+                      <th class="py-2 px-4 border-b">REQUEST NUMBER</th>
+                      <th class="py-2 px-4 border-b">DOCUMENT NAME</th>
+                      <th class="py-2 px-4 border-b">ENTITY NAME</th>
+                      <th class="py-2 px-4 border-b">ISSUE DATE</th>
+                      <th class="py-2 px-4 border-b">EXPIRY DATE</th>
+                      <th class="py-2 px-4 border-b"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of searchResults">
+                      <td class="py-2 px-4 border-b text-center">
+                        {{ product.edasreqno }}
+                      </td>
+                      <td class="py-2 px-4 border-b text-center">
+                        {{ product.docname }}
+                      </td>
+                      <td class="py-2 px-4 border-b text-center">
+                        {{ product.entityname }}
+                      </td>
+                      <td class="py-2 px-4 border-b text-center">
+                        {{ product.docissuedate }}
+                      </td>
+                      <td class="py-2 px-4 border-b text-center">
+                        {{ product.docexpirydate }}
+                      </td>
+                      <td class="py-2 px-4 border-b">
+                        <button
+                          mat-flat-button
+                          color="primary"
+                          class="green-filled-btn w-100 btn-w-30 btn-search"
+                          (click)="getFileDetForQRCode(product)"
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div> -->
+            <br />
+          </div>
+          <div
+            *ngIf="activeIndex === 3"
+            style="height: 100%"
+            class="flex justify-center items-center"
+          >
+            <!-- Step 4 -->
+            <br />
+            <div class="flex justify-center items-center">
+              <h1 class="flex text-center">
+                {{ "ThankYou" | translate }}
+              </h1>
+            </div>
+
+            <div class="grid grid-cols-1" *ngIf="false">
+              <p *ngIf="isLoading">
+                {{ "label.attestationWorkflow.loading" | translate }}
+              </p>
+              <div
+                id="outerContainer"
+                [ngClass]="{
+                  maximized: isMaximized,
+                  nomaximized: !isMaximized
+                }"
+              >
+                <div class="pdf-container">
+                  <ng-container *ngIf="IsFileFound">
+                    <!-- action -->
+                    <div class="flex gap-2 p-1 w-100 pdf-action">
+                      <button
+                        type="button"
+                        class="p-element mr-2 grid-header-right-icon p-button p-component p-button-icon-only"
+                        (click)="maximizeFile()"
+                        [pTooltip]="
+                          isMaximized
+                            ? ('label.shrink' | translate)
+                            : ('label.expand' | translate)
+                        "
+                        tooltipPosition="left"
+                      >
+                        <i class="fa fa-expand" *ngIf="!isMaximized"></i>
+                        <i class="fa fa-times" *ngIf="isMaximized"></i>
+                      </button>
+                    </div>
+                    <!-- pdf-viewer -->
+                    <pdf-viewer
+                      [src]="src"
+                      [rotation]="0"
+                      [original-size]="false"
+                      [show-all]="true"
+                      [fit-to-page]="false"
+                      [zoom]="isMaximized ? 1.1 : 1"
+                      [zoom-scale]="'page-width'"
+                      [stick-to-page]="false"
+                      [render-text]="true"
+                      [external-link-target]="'blank'"
+                      [autoresize]="true"
+                      [show-borders]="false"
+                      class="nomaximized"
+                    ></pdf-viewer>
+                    <button
+                      mat-raised-button
+                      style="
+                        position: absolute;
+                        bottom: 10px;
+                        align-items: center;
+                      "
+                      (click)="downloadFileContent(true)"
+                    >
+                      {{ "label.attestationWorkflow.downloadpdf" | translate }}
+                    </button>
+                  </ng-container>
+                  <div class="file-not-found">
+                    <label *ngIf="!IsFileFound" class="file-not-found-label">{{
+                      "label.attestationWorkflow.filenotfound" | translate
+                    }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+
+        <!-- Footer with Buttons -->
+        <div class="stepfooter">
+          <div class="flex px-2 mx-2 btn-action">
+            <button
+              mat-flat-button
+              color="secondary"
+              class="sbutton w-100 mat-focus-indicator mat-stroked-button mat-button-base mat-secondary"
+              (click)="goToPrevstep(activeIndex - 1)"
+              *ngIf="activeIndex > 0 && activeIndex < 3"
+            >
+              {{ "Previous" }}
+            </button>
+            &nbsp;
+            <button
+              mat-flat-button
+              color="primary"
+              class="sbutton w-100"
+              (click)="goToNextstep(activeIndex + 1)"
+              [disabled]="activeIndex === 1 && !edasreqno"
+            >
+              {{
+                activeIndex === 1
+                  ? ("Proceed" | translate)
+                  : activeIndex === 3
+                  ? ("Home" | translate)
+                  : ("Next" | translate)
+              }}
+            </button>
+          </div>
+          <br />
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showLockScreen">
+  <div class="lock-screen">
+    <div class="lock-section">
+      <div class="body-bg1 w-100 verify-page-lock">
+        <div class="alreadyregisteredapproved-section">
+          <div class="w-50 m-auto">
+            <mat-card>
+              <div class="p-4 text-center">
+                <h1 class="mt-0 mb-0 page-title-01" *ngIf="!showLockScreenText">
+                  {{ "ServiceProvidedMofa" | translate }}
+                </h1>
+                <h1 class="mt-0 mb-0 page-title-01" *ngIf="showLockScreenText">
+                  {{ showLockScreenText | translate }}
+                </h1>
+
+                <div class="mt-3 grid grid-cols-1 rtl-form">
+                  <div class="grid grid-cols-1 text-center">
+                    <!-- <h1 class="page-title-01 text-uaemofa">
+                      <strong>{{ "label.willgetlogout" | translate }}</strong>
+                    </h1> -->
+                  </div>
+
+                  <div class="grid grid-cols-1 mb-3" *ngIf="false">
+                    <div class="grid grid-cols-1">
+                      <div class="border-2 bg-white rounded-xl p-5">
+                        <div class="grid grid-cols-1 text-center mb-3">
+                          <i
+                            class="fa fa-question-circle fa-3x text-uaemofa"
+                          ></i>
+                        </div>
+                        <h2 class="text-lg">
+                          <strong>{{
+                            "label.presstocontinue" | translate
+                          }}</strong>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1"></div>
+
+                  <div class="text-right" *ngIf="false">
+                    <button mat-flat-button color="primary">
+                      {{ "label.login.unlock" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

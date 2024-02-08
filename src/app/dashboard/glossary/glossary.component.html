@@ -1,0 +1,58 @@
+<div class="grid grid-cols-1 page-header" color="primary">
+  <label style="font-size: 13px; color: white; font-weight: bold">{{ "Glossary" | translate }}</label>
+</div>
+
+<div class="col-md-3 col-lg-3 col-sm-6">
+  <mat-form-field class="searchboxinputglossary" floatLabel="always">
+    <input appTrimInput matInput type="text" [(ngModel)]="searchKeyword" (input)="searchContent()" placeholder="{{ 'SearchKeyword' | translate }}">
+  </mat-form-field>
+</div>
+
+<br>
+
+<div class="glossary_div_one">
+  <div class="glossary-container">
+    <mat-accordion multi>
+
+      <mat-expansion-panel *ngFor="let entry of filteredGlossaryContent; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div id="letter-{{ entry.title[0] }}" class="letter-header">
+              <h3 matLine [innerHTML]="getTitle(entry)"></h3>
+            </div>
+            <!--  [class.selected]="true" -->
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- <mat-expansion-panel-content> -->
+          <mat-card class="example-card">
+            <mat-card-content>
+              <ng-container *ngFor="let element of getContent(entry)">
+                <div [ngSwitch]="element.type">
+                  <div class="paragraph" *ngSwitchCase="'paragraph'" [innerHTML]="(element.value)"></div>
+                  <div class="list" *ngSwitchCase="'list'">
+                    <ul>
+                      <ul class="listv">
+                        <ng-container *ngFor="let listItem of toArray(element.value)">
+                          <li [innerHTML]="(listItem)"></li>
+                        </ng-container>
+                      </ul>
+                    </ul>
+                  </div>
+                  <div class="steps" *ngSwitchCase="'steps'">
+                    <ol>
+                      <ng-container *ngFor="let step of toArray(element.value)">
+                        <li [innerHTML]="(step)"></li>
+                      </ng-container>
+                    </ol>
+                  </div>
+                </div>
+              </ng-container>
+            </mat-card-content>
+          </mat-card>
+          <div *ngIf="i < filteredGlossaryContent.length - 1 && entry.title[0] === filteredGlossaryContent[i + 1].title[0]" class="separator"></div>
+        <!-- </mat-expansion-panel-content> -->
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+</div>

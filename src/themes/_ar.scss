@@ -1,0 +1,97 @@
+.page-header h3 {
+    text-align: right;
+}
+h1.page-title-01 {
+    text-align: right;
+}
+p.page-title-para {
+    text-align: right;
+}
+.text-right {
+    text-align: left!important;
+}
+.mat-form-field {
+    width: 100%;
+}
+img.footer-main-logo {
+    padding-left: 0;
+    padding-right: 16px;
+}
+.subscribe-btn .mat-flat-button { 
+    border-radius: 4px 0 0 4px!important;
+  }
+  .subscribe-btn .mat-form-field-outline-end {
+    border-radius: 0 4px 4px 0 !important;
+  }
+  .subscribe-btn .mat-form-field-outline-start {
+    border-radius: 0 0 0 0 !important;
+  }
+  .mat-radio-label {
+    direction: rtl;
+}
+.mat-radio-label-content {
+    padding-left: 0;
+    padding-right: 8px;
+}
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+    margin: 0;
+    text-align: right;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    direction: rtl;
+}
+.footer-top-section {
+    direction: rtl;
+}
+.footer-top-section .mat-form-field {
+    direction: ltr;
+}
+.mat-drawer {
+    right: 0;
+    left: auto;
+    transform: translate3d(100%, 0, 0);
+}
+.mat-content {
+    direction: rtl;
+}
+.mofa-side-menus .mat-expansion-indicator {
+    right: 4px;
+    left: auto;
+}
+.mofa-side-menus .mat-expansion-panel-header-description, .mofa-side-menus .mat-expansion-indicator::after {
+    transform: rotate(-225deg);
+}
+.mofa-side-menus .mat-expanded .mat-expansion-panel-header.mat-expanded .mat-expansion-indicator {
+    transform: rotate(-90deg) !important;
+}
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+    direction: rtl;
+}
+.mat-list-base .mat-list-item-content .mat-icon {
+    transform: rotate(-180deg) !important;
+}
+.mofa-side-menus .mat-icon {
+    margin-left: 10px;
+    margin-right:0;
+}
+.main-header > .mr-2.cursor-pointer {
+    margin-left: 0.5rem;
+    margin-right:0;
+}
+ul{
+    direction: rtl;
+}
+.mofa-side-nav ul li {
+    padding-right: 20px;
+    padding-left: 0;
+}
+.mofa-side-nav ul li::before {
+    margin-right: -18px;
+    margin-left:0;
+}
+.float-left {
+    float: right;
+}
+.dw-container .timeline-block::before {
+    right: 9px;
+}

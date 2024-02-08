@@ -1,0 +1,60 @@
+<mat-divider></mat-divider>
+<div class="grid grid-cols-1" color="primary" class="page-header">
+    <label style="font-size: 13px; color: white; font-weight: bold"
+      >{{ "User profile" | translate }} 
+    </label>
+  </div>
+
+<div class="company-bg">
+    <div class="container mx-auto px-32 ">
+<div class="profilediv">
+    <div class="grid grid-cols-1 gap-8">
+        <div class="profile-left-box grid grid-cols-2 mt-2">
+            <div class="grid grid-cols-1 pt-10">
+                <div class="profile-page-avatar_user">
+                    <i class="fa fa-user user-dp-icon"></i>
+                </div>
+            </div>
+            <div class="p-5">
+          
+            <div class="grid grid-cols-1 gap-4 mt-5">
+                <div class="grid grid-cols-1">
+                    <div style="font-size: 30px;" class="a-bold-brown">{{list1.repfullnameen.toUpperCase()}}</div>
+                    <div class="a-bold-brown">
+                      <span >{{list1.repemailaddress || list1.companyemailaddress}}</span>
+                    </div>
+                    <div class="a-bold-brown">{{list1.companycontactno}}</div>
+                    <div class="a-bold-brown">{{list1.rolename}}</div>
+                    <!-- class="companyname" -->
+                    <div class="a-bold-brown designation"> {{list1.repdesignation}}</div>
+                    <div class="a-bold-brown"> {{ this.common.splitdatetime(list1.lastlogin)?.date }} {{ this.common.splitdatetime(list1.lastlogin)?.time }}</div>
+
+            </div>
+            </div>
+        </div>
+
+        </div>
+        <div>
+            <div class="csp-ti-box csp-ti-box-white profile-info-section mt-5">
+        
+                <div class="grid grid-cols-1 csp-list-02">
+                    <mat-list role="list">
+                      
+                    </mat-list>
+                </div>
+
+
+            </div>
+        </div>
+     
+        <div></div>
+    </div>
+  
+
+
+
+</div>
+
+</div>
+</div>
+

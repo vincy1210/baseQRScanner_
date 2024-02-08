@@ -1,0 +1,85 @@
+/* glossary.component.css */
+
+.alphabet-navigation {
+    display: flow;
+    justify-content: center;
+    margin-top: -9px;
+  }
+  
+ 
+
+  .glossary_div_one{
+    padding: 2% 5%;
+
+  }
+
+  .mat-button{
+    min-width: 26px !important;
+    line-height: 36px;
+    padding: 0 15px !important;
+  }
+
+  .example-card {
+    max-width: 100%;
+    margin: 20px;
+    cursor: pointer; /* Add this to make it clear it's clickable */
+  }
+  
+  .letter-header {
+    /* background-color: #eee; */
+    padding: 17px;
+  }
+
+  /* Add necessary styles in your component's CSS or global styles */
+
+.separator {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0px 2px 1px -1px #b68a35, 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Add this style for highlighting the selected letter */
+.alphabet-navigation button.selected {
+  background-color: #b68a35; /* You can customize the color */
+  color: white;
+}
+
+
+.listv{
+  list-style-type:square;
+   /* margin-left: 5% !important;
+    margin-top: -4% !important; */
+    padding: 16px;
+}
+.glossary-container{
+  line-height: 25px;
+  background-color: #fff;
+}
+
+.searchboxinputglossary{
+
+  height: 20px;
+  margin-top: 1.11em !important;
+  display: flex;
+  justify-content: end;
+  padding: 0 7em;
+}
+
+
+
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+
+
+.faqs .accordion-button:hover {
+  background-color: #f5f5f5;
+  border-left: 5px solid #f36c21;
+}
+
+

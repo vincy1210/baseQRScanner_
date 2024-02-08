@@ -1,0 +1,23 @@
+.mat-tab-label .mat-tab-label-content {
+    color: #121212 !important;
+    font-weight: 600;
+  }
+
+  .company_name {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    text-wrap: nowrap;
+}
+
+
+td{
+  padding: 3px !important;
+}
+
+.profile-page-avatar{
+  margin-top: 2rem;
+}
+
+

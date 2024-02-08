@@ -1,0 +1,149 @@
+<div style="font-size: 12px !important; ">
+    <div class="grid grid-cols-1" color="primary" class="page-header">
+      <label style="font-size: 13px; color: white; font-weight: bold"
+        >{{ "Pay All" | translate }} 
+      </label>
+    </div>
+    <div style="padding-top: 10px;">
+  
+      <div class="alert alert-success flex" role="alert">
+        <span
+          class="glyphicon glyphicon-exclamation-sign"
+          aria-hidden="true"
+        ></span>
+        <i class="fas fa-lightbulb light-bulb"></i>
+        <p>
+          Pay All Details are shown in this list. LCA Completed
+          Request are shown in this list. Pay All Details are
+          shown in this list. Pay All Details are shown in this
+          list. Pay All Details are shown in this list. Pay All Details are shown in this list.
+        </p>
+      </div>
+      </div>
+  
+    <div style="padding: 3px; border-radius: 2px">
+      <div class="grid grid-cols-1">
+        <div  class="payallgrid">
+
+          <!-- Hi helloo   *ngIf="payallcount" -->
+
+          <!-- <mat-tab label="{{'Payment' | translate}}"> -->
+            <div class="flex grid grid-cols-2 gap-6 bringitincenter  payment-header-label">
+              <div *ngIf="noofattest" class="p-1">
+                <mat-label >{{
+                  "No. of LCA Invoice(s)" | translate
+                }}</mat-label>
+              </div>
+              <div *ngIf="noofattest" class="amount_right_align">{{ noofattest }}</div>
+              <!--  -->
+
+              <div *ngIf="coocount" class="p-1">
+                <mat-label >{{
+                  "No. of COO Invoice(s)" | translate
+                }}</mat-label>
+              </div>
+              <div *ngIf="coocount" class="amount_right_align">{{ coocount }}</div>
+
+              <!--  -->
+              <div class="p-1" *ngIf="nooffines"> 
+                <mat-label >{{ "No. of Fine(s)" | translate }}</mat-label>
+               </div>
+              <div *ngIf="nooffines" class="amount_right_align">{{ nooffines }}</div>
+
+
+              <!--  -->
+              <div *ngIf="noofattest" class="p-1">
+                <mat-label >{{
+                  "LCA Invoice Fee(s)" | translate
+                }}</mat-label>
+              </div>
+              <div *ngIf="noofattest" class="amount_right_align">
+                {{ "AED" | translate }}
+                {{ common.formatAmount(invoicefeesamount) }}
+              </div>
+              <!-- nil -->
+              <div class="p-1" *ngIf="coocount">
+                <mat-label >{{
+                  "COO Invoice Fee(s)" | translate
+                }}</mat-label>
+              </div>
+              <div *ngIf="coocount" class="amount_right_align">
+                {{ "AED" | translate }}
+                {{ common.formatAmount(coofeesamount) }}
+              </div>
+              <!--  -->
+
+              <div class="p-1" *ngIf="fineamount">
+                <mat-label >{{
+                  "Fine Amount" | translate
+                }}</mat-label>
+              </div>
+              <div  *ngIf="fineamount" class="amount_right_align">
+                {{ "AED" | translate }}
+                {{ common.formatAmount(fineamount) }}
+              </div>
+
+              <!--  -->
+              <div class="p-1"></div>
+              <div class="payment-total-amount">
+                <div class="row">
+                  <span
+                    ><mat-label
+                      class="amount_right_align payment-header-label"
+                      >{{ "totalamount" | translate }}</mat-label
+                    ></span
+                  >
+                </div>
+                <div class="row" style="padding: 5px"></div>
+
+                <div class="row">
+                  <span
+                    ><mat-label
+                      class="payment-total-amount2 amount_right_align"
+                      >{{ "AED" | translate }}
+                      {{ common.formatAmount(totalamount) }}</mat-label
+                    ></span
+                  >
+                </div>
+                <div class="row" style="padding: 2px"></div>
+                <div class="row">
+                  <span
+                    ><mat-label
+                      class="payment-total-amount3 amount_right_align"
+                      >{{ "incl.VAT" | translate }}</mat-label
+                    ></span
+                  >
+                </div>
+                <!-- {{payment_button_isdisabled}} -->
+              </div>
+              <div class="gap-4 flex items-center justify-center col-span-2">
+                <button
+                  [disabled]="!totalamount"
+                  mat-flat-button
+                  color="primary"
+                  (click)="AttestationPay()"
+                  class="pay-btn"
+                >
+                  {{ 'Pay All' | translate }}
+                </button>
+              </div>
+              <div class="flex items-center justify-center col-span-2">
+                <a class="powered_by">{{ "Powered by" | translate }}</a>
+                &nbsp;<a class="magnati">{{ "magnati" | translate }}</a>
+              </div>
+            </div>
+          <!-- </mat-tab> -->
+          
+         
+  
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  
+  <!-- modal -->
+  
+  
+  

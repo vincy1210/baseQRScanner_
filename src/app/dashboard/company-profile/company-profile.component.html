@@ -1,0 +1,505 @@
+<mat-divider></mat-divider>
+<div class="company-bg">
+
+    <div class="container mx-auto px-32 ">
+
+<div>
+    <div class="grid grid-cols-2 gap-8">
+        <table>
+          <tr>
+              <td class="grid grid-cols-1 pt-10">
+                  <div class="profile-page-avatar">
+                      <i class="fa fa-industry company-dp-icon"></i>
+                  </div>
+              </td>
+              <td class="p-5">
+                  <div class="grid grid-cols-1 gap-4 mt-5">
+                      <div class="grid grid-cols-1">
+                          <div class="a-bold-brown company_name">{{list1.nameofbusiness.toUpperCase()}}</div>
+                          <div class="a-bold-brown" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                              <span >{{prefemailaddresstodisplay}}</span> &nbsp;
+                              <div *ngIf="isadmin" style="cursor: pointer; display: inline-block;" pTooltip="{{'Edit' | translate}}" (click)="updateprefemailopenpopup()">
+                                  <i class="fa fa-edit align-middle "></i>
+                              </div>
+                          </div>
+                          <div class="a-bold-brown"> {{list1.companycontactno}}</div>
+                      </div>
+                  </div>
+              </td>
+          </tr>
+      </table>
+      
+        <div>
+            <div class="csp-ti-box csp-ti-box-white profile-info-section mt-5">
+        
+                <div class="grid grid-cols-1 csp-list-02">
+                  <table>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'Company Name' | translate}}</div></td>
+                        <td><div class="a-bold-brown">{{list1.nameofbusiness}}</div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'Email ID' | translate}}</div></td>
+                        <td><div class="a-bold-brown">{{list1.companyemailaddress}}</div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'Trade Licence No' | translate}}</div></td>
+                        <td><div class="a-bold-brown">{{list1.tradelicenseno}}</div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'tradelicenseissuedate' | translate}}</div></td>
+                        <td><div class="a-bold-brown">{{common.splitdatetime(list1.licenseissuedate)?.date}}</div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'tradelicenseexpirydate' | translate}}</div></td>
+                        <td><div class="a-bold-brown">{{common.splitdatetime(list1.licenseexpirydate)?.date}}</div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="a-bold-grey">{{'status' | translate}}</div></td>
+                        <td>
+                            <div *ngIf="!list1.islicenseexpired" class="text-green-info">
+                                <span >{{'Active' | translate}}</span>
+                                <div class="float-left ml-3"> <i class="fa fa-info-circle fa-2x align-middle "></i></div>
+                            </div>
+                
+                            <div *ngIf="list1.islicenseexpired" class="text-red-info">
+                                <span class="float-left">{{'Expired' | translate}}</span>
+                                <div class="float-left ml-3"> <i class="fa fa-info-circle fa-2x align-middle "></i></div>
+                                
+                                <div *ngIf="isadmin" style="cursor: pointer;" pTooltip="{{'Edit' | translate}}" (click)="openNew()" class="float-left ml-3"> <i class="fa fa-edit align-middle "></i></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                </div>
+
+
+            </div>
+        </div>
+     
+        <div></div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="profile-right-box bg-white rounded-lg mb-5 p-3">
+            <div class="si-mattab-spacing position-relative">
+
+                <mat-tab-group class="labelclassv" mat-align-tabs="start" dynamicHeight [disableRipple]="true">
+                    <mat-tab  label="{{'General Settings' | translate}}">
+                        <div style="padding: 5px;" class="grid grid-cols-1 gap-4">
+                            <div class="csp-ti-box csp-ti-box-white profile-info-section">
+        
+                                <div class="grid grid-cols-1 csp-list-02">
+                                  <table>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'Company Name' | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2">
+                                            <div class="a-bold-brown">{{list1.nameofbusiness}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'Email ID' | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2">
+                                            <div class="a-bold-brown">{{list1.companyemailaddress}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'Trade Licence No' | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2">
+                                            <div class="a-bold-brown">{{list1.tradelicenseno}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'tradelicenseissuedate'  | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2">
+                                            <div class="a-bold-brown">{{common.splitdatetime(list1.licenseissuedate)?.date}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'tradelicenseexpirydate'  | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2">
+                                            <div class="a-bold-brown">{{common.splitdatetime(list1.licenseexpirydate)?.date}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="a-bold-grey">{{'status'  | translate}}</div>
+                                        </td>
+                                        <td class="col-span-2" [ngClass]="{'text-green-info': !list1.islicenseexpired, 'text-red-info': list1.islicenseexpired}">
+                                            <span class="float-left">{{ list1.islicenseexpired ? 'Expired' : 'Active' }}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                </div>
+                            </div>
+                        </div>
+        
+        
+                    </mat-tab>
+                    <mat-tab class="blacklabel" label="{{'Company Users' | translate}}">
+                        <div style="padding-bottom: 10px;" class="grid grid-cols-1 gap-4">
+                            <div class="csp-ti-box csp-ti-box-white profile-info-section">
+        
+                                <p-table   [resizableColumns]="true" dataKey="edasattestno"  [scrollable]="true"   selectionMode="multiple"
+                                #tableref [rowHover]="true" [paginator]="true" currentPageReportTemplate="{{'Showing' | translate}} {first} {{'to' | translate}} {last} {{'of' | translate}} {totalRecords} {{'entries' | translate}}" [filterDelay]="0"
+                                [totalRecords]="totalrecords"
+                                [value]="list"
+                                [rows]="5" [columns]="cols"
+                                [showCurrentPageReport]="true"
+                                [rowsPerPageOptions]="[5, 10]"
+                                [loading]="loading"
+                                styleClass="p-datatable-customers p-datatable-gridlines"
+                                currentPageReportTemplate="{{'Showing' | translate}} {first} {{'to' | translate}} {last} {{'of' | translate}} {totalRecords} {{'entries' | translate}}"
+                                [globalFilterFields]="[
+                                 'eid','fullnameen','usertype','emailid', 'mobilenumber', 'enteredby', 'enteredon'
+                                ]">
+                              
+                                <ng-template pTemplate="caption">
+                        
+                                  <p-toolbar  >
+                                    <ng-template pTemplate="left">
+                                      <div style="padding: 5px;" class="col-md-3 col-lg-3 col-sm-6">
+                                              <mat-form-field class="searchboxinput" >
+                                                <mat-label><mat-icon style="font-size:larger;">search</mat-icon> {{'SearchKeyword' | translate}}</mat-label>
+                                                <input appTrimInput   matInput type="text" (input)="tableref.filterGlobal($any($event.target).value, 'contains')" placeholder="{{'SearchKeyword' | translate}}">
+                                              </mat-form-field>
+                                      </div>
+                                   
+                        </ng-template>
+                                </p-toolbar>
+                                </ng-template>
+                                
+                                <ng-template pTemplate="header" let-columns>
+                                  <tr>
+                                      <!-- <th>
+                                      </th> -->
+                                      <th *ngFor="let col of columns" pResizableColumn [pSortableColumn]="col.field" >
+                                          {{col.header | translate}} 
+                                          <p-sortIcon  [field]="col.field"  ></p-sortIcon>
+                                        
+                                  </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-list>
+                                  <tr>
+                                      <!-- <td>
+                                          <p-tableCheckbox   [value]="list"></p-tableCheckbox>
+                                      </td> -->
+                                      <td>   
+                                        <!-- EmiratesID -->
+                                        <span >{{list.eid?.trim() | eidFormatter}} </span>
+                                          
+                                      </td>
+                                      <td>
+                                        <!-- Name -->
+                                          <span class="image-text">{{list.fullnameen}}</span>
+                                      </td>
+                                      <td>
+                                        <!-- Role -->
+                                        <span class="image-text">{{ list.usertype}}</span>
+                                    </td>
+                                    
+                                      <!-- <td>
+                                          <span class="image-text">{{common.formatDateString(list.declarationdate)}}</span>  'usertype','emailid', 'mobilenumber', 'enteredby', 'enteredon'
+                                      </td> -->
+                                      <td>
+                                        <!-- Email ID -->
+                                          <span class="image-text">{{list.emailid}}</span>
+                                      </td>
+                                      <td>
+                                        <!-- Mobile Number -->
+                                          <span class="image-text">{{common.formatmobilenumber(list.mobilenumber)}}</span>
+                                      </td>
+                                      <td>
+                                        <!-- Entered by -->
+                                          <span class="image-text">{{list.enteredby}}</span>
+                                      </td>
+                                      <td>
+                                        <!-- Entered on -->
+                                          <span class="image-text">{{common.splitdatetime(list.enteredon)?.date}}</span>
+                                      </td>
+                                  </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                  <tr>
+                                    <td style="text-align: center  !important;" colspan="9">{{'No data found.' | translate}}</td>
+                                  </tr>
+                                </ng-template>
+                              </p-table>
+        
+                            </div>
+                        </div>
+        
+        
+                    </mat-tab>
+                   
+                    
+                    
+                    
+                </mat-tab-group>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<!-- modal details popup -->
+<p-dialog
+  [(visible)]="AddInvoiceDialog"
+  style="top: 20%; height: 80%"
+  [draggable]="false"
+  [dismissableMask]="false"
+  [style]="{ width: '750px' }"
+  header="{{ 'Company Details' | translate }}"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+ <div>
+    <form  [formGroup]="companyDetailsForm">
+      
+        <div class="grid grid-cols-1">
+   
+          <mat-form-field appearance="outline">
+              <mat-label>{{'Company' | translate}}</mat-label>
+              <input appTrimInput  matInput formControlName="name_of_Business" readonly [disabled]="true" name="name_of_Business" >
+            </mat-form-field>
+   
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>{{'tradelicensenumber' | translate }}</mat-label>
+                  <input appTrimInput readonly [disabled]="true"  autocomplete="off" formControlName="trade_Licence" name="trade_Licence" matInput placeholder="123456">
+                <mat-error *ngIf="companyDetailsForm.get('trade_Licence')?.hasError('required')">{{'Trade License number is required' | translate }} </mat-error>
+                <mat-error *ngIf="companyDetailsForm.get('trade_Licence')?.hasError('pattern')">{{'Trade License number is required' | translate }} </mat-error>
+       
+                </mat-form-field>
+          </div>
+         
+        </div>
+   
+        <div class="grid grid-cols-2 gap-4">
+   
+          <div>
+            <mat-form-field class="example-form-field">
+              <mat-label>{{'tradelicenseissuedate' | translate }}</mat-label>
+              <input appTrimInput matInput readonly  [max]="today"  autocomplete="off" [disabled]="true" formControlName="trade_Licence_Issue_Date" name="trade_Licence_Issue_Date" [matDatepicker]="tlissuedate" placeholder="19/02/1972">
+   
+              <mat-datepicker-toggle matSuffix [for]="tlissuedate"></mat-datepicker-toggle>
+              <mat-datepicker #tlissuedate>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>{{'cancelbtn' | translate }}</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>{{'applybtn' | translate
+                    }}</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+              <mat-error *ngIf="companyDetailsForm.get('trade_Licence_Issue_Date')?.hasError('required')">{{'Trade License issue Date is required' | translate }}</mat-error>
+   
+            </mat-form-field>
+          </div>
+   
+          <div>
+            <mat-form-field class="example-form-field">
+              <mat-label>{{'tradelicenseexpirydate' | translate }}</mat-label>
+              <input appTrimInput matInput readonly autocomplete="off" [min]="today" formControlName="trade_Licence_Expiry_Date" name="trade_Licence_Expiry_Date" [matDatepicker]="tlexpirydate" placeholder="19/10/2025">
+              <mat-datepicker-toggle matSuffix [for]="tlexpirydate"></mat-datepicker-toggle>
+              <mat-datepicker #tlexpirydate>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>{{'cancelbtn' | translate }}</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>{{'applybtn' | translate
+                    }}</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+              <mat-error *ngIf="companyDetailsForm.get('trade_Licence_Expiry_Date')?.hasError('required')">{{'Trade License Expiry Date is required' | translate }} </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+   
+        <div class="grid grid-cols-2 gap-4">
+  <div>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'licenseissuingauthority' | translate }}</mat-label>
+          <input appTrimInput matInput readonly [disabled]="true"  autocomplete="off" formControlName="Licence_issuing_auth" name="Licence_issuing_auth" placeholder="Free zone">
+          <mat-error *ngIf="companyDetailsForm.get('Licence_issuing_auth')?.hasError('required')">{{'License issuing authority is required' | translate }} </mat-error>
+          <mat-error *ngIf="companyDetailsForm.get('Licence_issuing_auth')?.hasError('pattern')">{{'License issuing authority is required' | translate }} </mat-error>
+       
+        </mat-form-field>
+  </div>
+         <div>
+          <div class="grid grid-cols-1">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'legaltype' | translate }}</mat-label>
+                <mat-select name="legal_Type" formControlName="legal_Type">
+                  <mat-option *ngFor="let option of legalTypeOptions" [value]="option.typeuno">
+                    {{ option.typename }}
+                  </mat-option>
+                </mat-select>
+                <mat-error class="error" *ngIf="companyDetailsForm.get('legal_Type')?.hasError('required')">{{'Legal Type is required' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+           
+         </div>
+   
+   
+        </div>
+   
+     
+   
+        <div class="grid grid-cols-2 gap-4">
+   
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{'companyregisteredemailaddress' | translate }} </mat-label>
+              <input appTrimInput matInput readonly  autocomplete="off" formControlName="Comp_Reg_Email_Address" name="Comp_Reg_Email_Address" placeholder="example@etech.com">
+              <!-- <span matSuffix>&nbsp;{{'EDIT' | translate }}</span> -->
+              <mat-error *ngIf="companyDetailsForm.get('Comp_Reg_Email_Address')?.hasError('required')">{{'Company Registered Email Address is required' | translate }} </mat-error>
+              <mat-error *ngIf="companyDetailsForm.get('Comp_Reg_Email_Address')?.hasError('email')">{{ 'Invalid Email format' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+   
+          <div>
+            <mat-form-field appearance="outline" floatLabel="always">
+              <mat-label>{{'companycontactnumber' | translate }}   </mat-label>
+              <input appTrimInput readonly matInput type="tel"  autocomplete="off" maxlength="9" formControlName="Comp_contact_number" name="Comp_contact_number"    placeholder="55 1234 567">
+              <span matPrefix>+971&nbsp;</span>
+              <!-- <span matSuffix>&nbsp;{{'EDIT' | translate }}</span> -->
+              <mat-error *ngIf="!(companyDetailsForm.get('Comp_contact_number')?.hasError('minlength')|| companyDetailsForm.get('Comp_contact_number')?.hasError('maxlength'))&&companyDetailsForm.get('Comp_contact_number')?.hasError('pattern')">{{'Invalid Company Contact Number' | translate }} </mat-error>
+              <mat-error *ngIf="companyDetailsForm.get('Comp_contact_number')?.hasError('minlength')|| companyDetailsForm.get('Comp_contact_number')?.hasError('maxlength')">{{'Company Contact Number must be 9 characters long' | translate }}</mat-error>
+              <mat-error *ngIf="companyDetailsForm.get('Comp_contact_number')?.hasError('required')">{{'Company Contact Number is required' | translate }} </mat-error>
+            </mat-form-field>
+          </div>
+   
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+   
+          <div class="cd-upload">
+           
+   
+            <!-- {{companyDetailsForm.get('Upload_trade_license')?.value}}  {{companyDetailsForm.get('Upload_trade_license')?.value!=''}}   &nbsp; &nbsp; &nbsp; -->
+            <mat-form-field appearance="outline" floatLabel="always">
+              <mat-label>{{'uploadtradelicense' | translate }}</mat-label>
+              <a mat-button color="primary" (click)="fileInput.click()" class="float-right"><span *ngIf="!isLoading">
+                {{ companyDetailsForm.get('Upload_trade_license')?.value === '' ? ('Upload' | translate) : ('Re-upload' | translate ) }}
+              </span>
+              <span  *ngIf="isLoading">
+                <mat-spinner diameter="35"></mat-spinner>
+              </span>
+            </a>
+              <input appTrimInput type="text" formControlName="Upload_trade_license" name="Upload_trade_license" readonly matInput />
+   
+              <input accept=".pdf" style="display: none" formControlName="Upload_trade_license" name="Upload_trade_license" #attachments type="file" (change)="onFileChanged($event)" #fileInput
+                />
+              <div *ngFor="let selected of listOfFiles; let index = index" class="cd-file-list">
+               <span class="doc_selected" >{{ selected }}</span> &nbsp; &nbsp; &nbsp;<mat-icon>check_circle_outline</mat-icon>
+                <small (click)="removeSelectedFile(index)">{{'Remove' | translate }}</small>
+              </div>
+          <mat-error *ngIf="companyDetailsForm.get('Upload_trade_license')?.hasError('required')"> {{'Trade License is required' | translate }} </mat-error>
+   
+            </mat-form-field>
+          </div>
+          <span
+         
+          style="padding: 15px; cursor: pointer"
+         
+          class="image-text viewaction">
+          <mat-icon  pTooltip="{{ 'Download Trade Licence' | translate }}" (click)="this.common.getimagebase64(attestfilelocation)" class="action_eye_icon">download</mat-icon>
+        </span>
+        </div>
+    </form>
+ </div>
+
+  <ng-template pTemplate="footer">
+
+  
+
+
+    <p-button
+      icon="pi pi-times"
+      (click)="AddInvoiceDialog = false"
+      label="{{ 'Cancel' | translate }}"
+      styleClass="p-confirm-dialog-reject"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="AddInvoiceDialogprefemail"
+  style="top: 20%; height: 80%"
+  [draggable]="false"
+  [dismissableMask]="false"
+  [style]="{ width: '750px' }"
+  header="{{ 'Update Details' | translate }}"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+<br>
+ <div>
+    <form  [formGroup]="prefform">
+       
+       
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>{{'prefemailaddress' | translate }}</mat-label>
+                  <input appTrimInput   autocomplete="off" formControlName="prefemailaddress" name="prefemailaddress" matInput placeholder="example@etech.com">
+                <mat-error *ngIf="prefform.get('prefemailaddress')?.hasError('required')">{{'Preferred Email address is required' | translate }} </mat-error>
+                <mat-error *ngIf="prefform.get('prefemailaddress')?.hasError('pattern')">{{'Preferred Email address is required' | translate }} </mat-error>
+       
+                </mat-form-field>
+          </div>
+          <div>
+   
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ 'Company Type' | translate }}</mat-label>
+                  <mat-select name="prefcomtype" formControlName="prefcomtype">
+                    <mat-option *ngFor="let option of companytypeoptions" [value]="option.itemno">
+                      {{ option.itemcode }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class="error" *ngIf="prefform.get('prefcomtype')?.hasError('required')">{{'Company Type is required' | translate }}</mat-error>
+                </mat-form-field>
+          </div>
+        </div>
+    </form>
+ </div>
+
+  <ng-template pTemplate="footer">
+
+    <button  
+    mat-flat-button 
+    color="primary"
+    (click)="updateprefemail()"
+    class="pay-btn"
+  >
+    {{ 'Update' | translate }}
+  </button>
+
+    <p-button
+      icon="pi pi-times"
+      (click)="AddInvoiceDialogprefemail = false"
+      label="{{ 'Cancel' | translate }}"
+      styleClass="p-confirm-dialog-reject"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+<!-- modal 2 end -->

@@ -1,0 +1,26 @@
+
+  .mat-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+  }
+
+  .active-link {
+    background-color: #fff9ed;
+    color: #191a1a;
+    font-weight: bold;
+  }
+  
+
+  .indicator-line {
+    position: absolute;
+    left: 0;
+    width: 3px; /* Adjust the width of the line as needed */
+    height: 48px; /* Adjust the height of the line based on your menu item height */
+    background-color: #1976D2; /* Set the background color of the line */
+    transition: top 0.3s; /* Add a smooth transition effect */
+  }
+
+ 
+
+  

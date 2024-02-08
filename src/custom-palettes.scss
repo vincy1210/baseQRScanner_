@@ -1,0 +1,117 @@
+// see http://mcg.mbitson.com
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+$wfs-brown-palette: (
+    50 : #f7f2e0,
+    100 : #ecdeb3,
+    200 : #dfc880,
+    300 : #d2b14d,
+    400 : #c9a126,
+    500 : #bf9000,
+    600 : #b98800,
+    700 : #b17d00,
+    800 : #B68A35,
+    900 : #9b6100,
+    A100 : #ffe6c6,
+    A200 : #ffd093,
+    A400 : #ffba60,
+    A700 : #ffaf47,
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$wfs-greyblack-palette: (
+    100 : #1B1D21,
+
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$wfs-yellow-palette: (
+    50 : #ffffe0,
+    100 : #ffffb3,
+    200 : #ffff80,
+    300 : #ffff4d,
+    400 : #ffff26,
+    500 : #ffff00,
+    600 : #ffff00,
+    700 : #ffff00,
+    800 : #ffff00,
+    900 : #ffff00,
+    A100 : #ffffff,
+    A200 : #fffff2,
+    A400 : #ffffbf,
+    A700 : #ffffa6,
+
+    contrast: (50 : #000000,
+    )
+);
+
+$wfs-blue-palette: (
+    50 : #e0e0ff,
+    100 : #b3b3ff,
+    200 : #8080ff,
+    300 : #4d4dff,
+    400 : #2626ff,
+    500 : #0000ff,
+    600 : #0000ff,
+    700 : #0000ff,
+    800 : #0000ff,
+    900 : #0000ff,
+    A100 : #ffffff,
+    A200 : #f2f2ff,
+    A400 : #bfbfff,
+    A700 : #a6a6ff,
+
+    contrast: (50 : #000000,
+    )
+);
+
+$wfs-lime-palette: (
+    50 : #e0ffe0,
+    100 : #b3ffb3,
+    200 : #80ff80,
+    300 : #4dff4d,
+    400 : #26ff26,
+    500 : #00ff00,
+    600 : #00ff00,
+    700 : #00ff00,
+    800 : #00ff00,
+    900 : #00ff00,
+    A100 : #ffffff,
+    A200 : #f2fff2,
+    A400 : #bfffbf,
+    A700 : #a6ffa6,
+
+    contrast: (50 : #000000,
+    )
+);

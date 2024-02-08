@@ -1,0 +1,138 @@
+<mat-tab-group>
+  <mat-tab label="{{'Timeline' | translate}}" *ngIf="Timelinevisible">
+    <div class="grid grid-cols-1">
+      <div class="dw-container mt-5">
+        <div class="timeline-block timeline-block-right {{ status0 }}">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <div class="float-left ml-3">
+              <div class="grid grid-cols-1">
+                <div class="w-100">
+                  <mat-chip-list>
+                    <h6 class="al-title">
+                      <span>CREATED</span><mat-icon>check</mat-icon>
+                    </h6>
+                  </mat-chip-list>
+                </div>
+                <small
+                  ><strong>{{ createdDateTime?.date }}</strong></small
+                >
+                <small>{{ createdDateTime?.time }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-block timeline-block-right {{ status1 }}">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <div class="float-left ml-3">
+              <div class="grid grid-cols-1">
+                <div class="w-100">
+                  <mat-chip-list>
+                    <h6 class="al-title">
+                      <span>APPROVED</span><mat-icon>check</mat-icon>
+                    </h6>
+                  </mat-chip-list>
+                </div>
+                <small
+                  ><strong>{{ approvedDateTime?.date }}</strong></small
+                >
+                <small>{{ approvedDateTime?.time }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="timeline-block timeline-block-right {{ status2 }}">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <div class="float-left ml-3">
+              <div class="grid grid-cols-1">
+                <div class="w-100">
+                  <mat-chip-list>
+                    <h6 class="al-title">
+                      <span>PAYMENT</span>
+                    </h6>
+                  </mat-chip-list>
+                </div>
+                <small
+                  ><strong>{{ paymentDateTime?.date }}</strong></small
+                >
+                <small>{{ paymentDateTime?.time }}</small>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="timeline-block timeline-block-right {{ status3 }}">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <div class="float-left ml-3">
+              <div class="grid grid-cols-1">
+                <div class="w-100">
+                  <mat-chip-list>
+                    <h6 class="al-title">
+                      <span>ATTESTATION</span>
+                      <!-- <mat-icon>check</mat-icon> -->
+                    </h6>
+                  </mat-chip-list>
+                </div>
+                <small
+                  ><strong>{{ attestationDateTime?.date }}</strong></small
+                >
+                <small>{{ attestationDateTime?.time }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-block timeline-block-right {{ status4 }}">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <div class="float-left ml-3">
+              <div class="grid grid-cols-1">
+                <div class="w-100">
+                  <mat-chip-list>
+                    <h6 class="al-title">
+                      <span>COMPLETED</span>
+                      <!-- <mat-icon>check</mat-icon> -->
+                    </h6>
+                  </mat-chip-list>
+                </div>
+                <small
+                  ><strong>{{ completedDateTime?.date }}</strong></small
+                >
+                <small>{{ completedDateTime?.time }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  
+  <mat-tab *ngIf="previewvisible" label="{{'Preview' | translate}}">
+    <div class="grid grid-cols-1">
+      <div id="outerContainer">
+        <div class="pdf-container">
+          <pdf-viewer
+            [src]="src"
+            [rotation]="0"
+            [original-size]="false"
+            [show-all]="true"
+            [fit-to-page]="false"
+            [zoom]="1"
+            [zoom-scale]="'page-width'"
+            [stick-to-page]="false"
+            [render-text]="true"
+            [external-link-target]="'blank'"
+            [autoresize]="true"
+            [show-borders]="false"
+            style="width: 100%; height: 600px"
+          ></pdf-viewer>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
